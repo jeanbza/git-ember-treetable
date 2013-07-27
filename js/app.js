@@ -1,3 +1,7 @@
+/**
+ * Code largely based on tutorial provided by Sebastian Seilund at http://dev.billysbilling.com/blog/How-to-implement-a-tree-in-Ember-js
+ */
+
 App = Ember.Application.create();
 
 App.TreeBranchController = Ember.ObjectController.extend({
