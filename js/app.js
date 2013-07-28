@@ -48,7 +48,7 @@ App.TreeNodeController = Ember.ObjectController.extend({
 		var allChecked = true;
 		Ember.get(node, 'children').forEach(function(child) {
 			var childController = App.TreeNodeController.controllerForNode(child);
-			if(Ember.get(childController, 'checked') == false) {
+			if(childController && Ember.get(childController, 'checked') == false) {
 				allChecked = false;
 			}
 		});
