@@ -105,15 +105,87 @@ function setParentsOnTree(node, parent) {
 	return node;
 }
 
-$.ajax({
-	url: "get_ccd_json.php",
-	async: false,
-	success: function(data) {
-		var parsedData = $.parseJSON(data);
-		parsedData = {
-			description: 'Root',
-			children: [parsedData]
-		};
-		App.set('treeRoot', setParentsOnTree(parsedData));
-	}
-});
+App.set('treeRoot', setParentsOnTree({
+	text: 'Root',
+	children: [
+		{
+			text: 'People',
+			children: [
+				{
+					text: 'Basketball players',
+					children: [
+						{
+							text: 'Lebron James',
+							children: []
+						},
+						{
+							text: 'Kobe Bryant',
+							children: []
+						}
+					]
+				},
+				{
+					text: 'Astronauts',
+					children: [
+						{
+							text: 'Neil Armstrong',
+							children: []
+						},
+						{
+							text: 'Yuri Gagarin',
+							children: []
+						}
+					]
+				}
+			]
+		},
+		{
+			text: 'Fruits',
+			children: [
+				{
+					text: 'Banana',
+					children: []
+				},
+				{
+					text: 'Pineapple',
+					children: []
+				},
+				{
+					text: 'Orange',
+					children: []
+				}
+			]
+		},
+		{
+			text: 'Clothes',
+			children: [
+				{
+					text: 'Women',
+					children: [
+						{
+							text: 'Dresses',
+							children: []
+						},
+						{
+							text: 'Tops',
+							children: []
+						}
+					]
+				},
+				{
+					text: 'Men',
+					children: [
+						{
+							text: 'Jeans',
+							children: []
+						},
+						{
+							text: 'Shirts',
+							children: []
+						}
+					]
+				}
+			]
+		}
+	]
+}));
