@@ -1,7 +1,3 @@
-/**
- * Code largely based on tutorial provided by Sebastian Seilund at http://dev.billysbilling.com/blog/How-to-implement-a-tree-in-Ember-js
- */
-
 App = Ember.Application.create();
 
 App.TreeBranchController = Ember.ObjectController.extend({
@@ -35,8 +31,12 @@ App.TreeNodeController = Ember.ObjectController.extend({
 	checkedDidChange: function() {
 		this.bubbleChecked(this.get('content.parent'));
 
-		if(this.get('checked') == true)
+		if(this.get('checked') == true) {
 			this.cascadeChecked(this.get('content'), this.get('checked'));
+		} else {
+			var selectedNodes = App.get('selectedNodes');
+			selectedNodes.removeObject(this.get('content'));
+		}
 	}.observes('checked'),
 
 	bubbleChecked: function(node) {
@@ -105,87 +105,15 @@ function setParentsOnTree(node, parent) {
 	return node;
 }
 
-App.set('treeRoot', setParentsOnTree({
-	text: 'Root',
-	children: [
-		{
-			text: 'People',
-			children: [
-				{
-					text: 'Basketball players',
-					children: [
-						{
-							text: 'Lebron James',
-							children: []
-						},
-						{
-							text: 'Kobe Bryant',
-							children: []
-						}
-					]
-				},
-				{
-					text: 'Astronauts',
-					children: [
-						{
-							text: 'Neil Armstrong',
-							children: []
-						},
-						{
-							text: 'Yuri Gagarin',
-							children: []
-						}
-					]
-				}
-			]
-		},
-		{
-			text: 'Fruits',
-			children: [
-				{
-					text: 'Banana',
-					children: []
-				},
-				{
-					text: 'Pineapple',
-					children: []
-				},
-				{
-					text: 'Orange',
-					children: []
-				}
-			]
-		},
-		{
-			text: 'Clothes',
-			children: [
-				{
-					text: 'Women',
-					children: [
-						{
-							text: 'Dresses',
-							children: []
-						},
-						{
-							text: 'Tops',
-							children: []
-						}
-					]
-				},
-				{
-					text: 'Men',
-					children: [
-						{
-							text: 'Jeans',
-							children: []
-						},
-						{
-							text: 'Shirts',
-							children: []
-						}
-					]
-				}
-			]
-		}
-	]
-}));
+$.ajax({
+	url: "get_ccd_json.php",
+	async: false,
+	success: function(data) {
+		var parsedData = $.parseJSON(data);
+		parsedData = {
+			description: 'Root',
+			children: [parsedData]
+		};
+		App.set('treeRoot', setParentsOnTree(parsedData));
+	}
+});
