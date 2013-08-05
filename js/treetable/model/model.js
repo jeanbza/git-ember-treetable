@@ -1,4 +1,4 @@
-var recursiveDepth = 8;
+var recursiveDepth = 3;
 var maxChildrenPerParent = 10;
 
 App.set('selectedNodes', Em.A()); //Start with an empty array

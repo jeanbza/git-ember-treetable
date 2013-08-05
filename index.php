@@ -12,14 +12,35 @@
 	<script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/ember/handlebars-1.0.0-rc.4.js"></script>
 	<script type="text/javascript" src="js/ember/ember-1.0.0-rc.6.js"></script>
-	<script type="text/javascript" src="js/app.js"></script>
+	
+    <script type="text/javascript" src="js/treetable/treetable.js"></script>
+    <script type="text/javascript" src="js/treetable/controller/treeTableController.js"></script>
+    <script type="text/javascript" src="js/treetable/controller/treeBranchController.js"></script>
+    <script type="text/javascript" src="js/treetable/controller/treeNodeController.js"></script>
+    <script type="text/javascript" src="js/treetable/model/model.js"></script>
+    <script type="text/javascript" src="js/treetable/view/treeTableView.js"></script>
+    <script type="text/javascript" src="js/treetable/view/treeBranchView.js"></script>
+    <script type="text/javascript" src="js/treetable/view/treeNodeView.js"></script>
+
+
 <meta charset=utf-8 />
 <title>Ember.js Tree Example</title>
 </head>
 <body>
-    
-<script data-template-name="application" type="text/x-handlebars">
-    <div {{action expandAll}}>Expand all</div>
+
+<script type="text/x-handlebars" dat>
+    {{render "treetable" Webapp.TreetableController}}
+</script>
+
+<script data-template-name="tree-application" type="text/x-handlebars">
+    <div {{action toggleAllExpanded}} class="expand-all">
+        {{#if controllers.treetable.allExpanded}}
+            Collapse All
+        {{else}}
+            Expand All
+        {{/if}}
+    </div>
+
     {{control "treeBranch" App.treeRoot}}
     {{#if App.selectedNodes.length}}
         <p>You have selected:</p>
@@ -49,10 +70,16 @@
             &#x25B6;
         {{/if}}
     </span>
+    
     {{view Ember.Checkbox checkedBinding="checked"}}
     {{text}}
+    
     {{#if isExpanded}}
         {{control "treeBranch" content}}
+    {{else}}
+        {{#if controllers.treetable.allExpanded}}
+            {{control "treeBranch" content}}
+        {{/if}}
     {{/if}}
 </script>
   
