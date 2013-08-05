@@ -1,3 +1,6 @@
+var recursiveDepth = 8;
+var maxChildrenPerParent = 10;
+
 App.set('selectedNodes', Em.A()); //Start with an empty array
 
 function setParentsOnTree(node, parent) {
@@ -8,58 +11,26 @@ function setParentsOnTree(node, parent) {
     return node;
 }
 
-App.set('treeRoot', setParentsOnTree({
-    text: 'Root',
-    children: [
-        {
-            text: 'People',
-            children: [
-                {
-                    text: 'Basketball players',
-                    children: [
-                        {text: 'Lebron James',children: []},
-                        {text: 'Kobe Bryant',children: []}
-                    ]
-                },
-                {
-                    text: 'Astronauts',
-                    children: [
-                        {text: 'Neil Armstrong',children: []},
-                        {text: 'Yuri Gagarin',children: []}
-                    ]
-                }
-            ]
-        },
-        {
-            text: 'Fruits',
-            children: [
-                {
-                    text: 'Banana',
-                    children: []
-                },
-                {
-                    text: 'Pineapple',children: []},
-                {text: 'Orange',children: []}
-            ]
-        },
-        {
-            text: 'Clothes',
-            children: [
-                {
-                    text: 'Women',
-                    children: [
-                        {text: 'Dresses',children: []},
-                        {text: 'Tops',children: []}
-                    ]
-                },
-                {
-                    text: 'Men',
-                    children: [
-                        {text: 'Jeans',children: []},
-                        {text: 'Shirts',children: []}
-                    ]
-                }
-            ]
+function getRandomWord() {
+    var randomWords = ['Rock', 'Paper', 'Scissor'];
+    return randomWords[Math.floor(Math.random()*randomWords.length)];
+}
+
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * max) + min;
+}
+
+function recursivelyCreateHierarchicalTree(recursiveDepth, maxChildrenPerParent) {
+    var children = new Array();
+
+    if(recursiveDepth > 0) {
+        for(var x = 0; x < getRandomNumber(0, maxChildrenPerParent); x++) {
+            var newChild = recursivelyCreateHierarchicalTree(recursiveDepth-1, maxChildrenPerParent);
+            children.push(newChild);
         }
-    ]
-}));
+    }
+
+    return {text: getRandomWord(), children: children};
+}
+
+App.set('treeRoot', setParentsOnTree(recursivelyCreateHierarchicalTree(recursiveDepth, maxChildrenPerParent)));
