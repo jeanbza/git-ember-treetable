@@ -11,8 +11,6 @@ App.TreeBranchView = Ember.View.extend({
 });
 
 App.TreeNodeController = Ember.ObjectController.extend({
-	needs: 'treetable',
-
 	isExpanded: false,
 	checked: false,
 
