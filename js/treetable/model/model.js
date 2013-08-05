@@ -24,7 +24,7 @@ function recursivelyCreateHierarchicalTree(recursiveDepth, maxChildrenPerParent)
     var children = new Array();
 
     if(recursiveDepth > 0) {
-        for(var x = 0; x < getRandomNumber(0, maxChildrenPerParent); x++) {
+        for(var x = 0; x < getRandomNumber(1, maxChildrenPerParent); x++) {
             var newChild = recursivelyCreateHierarchicalTree(recursiveDepth-1, maxChildrenPerParent);
             children.push(newChild);
         }
