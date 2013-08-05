@@ -63,7 +63,7 @@
 </script>
 
 <script data-template-name="tree-node" type="text/x-handlebars">
-    <span {{bindAttr class=":toggle-icon children.length::leaf"}} {{action toggle}}>
+    <span {{bindAttr class=":toggle-icon children.length::leaf"}} {{action toggle view}}>
         {{#if isExpanded}}
             &#x25BC;
         {{else}}
@@ -74,13 +74,7 @@
     {{view Ember.Checkbox checkedBinding="checked"}}
     {{text}}
     
-    {{#if isExpanded}}
-        {{control "treeBranch" content}}
-    {{else}}
-        {{#if controllers.treetable.allExpanded}}
-            {{control "treeBranch" content}}
-        {{/if}}
-    {{/if}}
+    {{control "treeBranch" content}}
 </script>
   
 </body>

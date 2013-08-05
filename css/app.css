@@ -4,31 +4,36 @@ ul {
 }
 
 /* line 4, ../sass/app.sass */
+.children-are-invisible ul {
+  display: none;
+}
+
+/* line 7, ../sass/app.sass */
 .expand-all {
   cursor: pointer;
 }
 
 /* Branch */
-/* line 8, ../sass/app.sass */
+/* line 11, ../sass/app.sass */
 .tree-branch {
   padding: 0px;
   margin: 0px;
 }
 
-/* line 12, ../sass/app.sass */
+/* line 15, ../sass/app.sass */
 .tree-node .tree-branch {
   padding-left: 10px;
 }
 
 /* Node */
-/* line 16, ../sass/app.sass */
+/* line 19, ../sass/app.sass */
 .tree-node {
   list-style: none;
   line-height: 20px;
 }
 
 /* Arrow */
-/* line 21, ../sass/app.sass */
+/* line 24, ../sass/app.sass */
 .tree-node .toggle-icon {
   cursor: pointer;
   display: inline-block;
@@ -37,12 +42,12 @@ ul {
   font-size: 10px;
 }
 
-/* line 28, ../sass/app.sass */
+/* line 31, ../sass/app.sass */
 .tree-node .toggle-icon:hover {
   opacity: 0.8;
 }
 
-/* line 31, ../sass/app.sass */
+/* line 34, ../sass/app.sass */
 .tree-node .toggle-icon.leaf {
   visibility: hidden;
 }

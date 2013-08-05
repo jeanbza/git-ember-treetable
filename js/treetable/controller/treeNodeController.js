@@ -1,7 +1,7 @@
 App.TreeNodeController = Ember.ObjectController.extend({
     needs: 'treetable',
 
-    isExpanded: false,
+    isExpanded: true,
     checked: false,
 
     allExpandedDidChange: function() {
@@ -12,14 +12,9 @@ App.TreeNodeController = Ember.ObjectController.extend({
         App.TreeNodeController.degisterNodeController(this.get('content'));
     },
 
-    toggle: function() {
-        this.set('isExpanded', !this.get('isExpanded'));
+    toggle: function(view) {
+        this.toggleProperty('isExpanded');
     },
-
-    allExpandedDidChange: function() {
-        console.dir("boom");
-        this.set('isExpanded', this.get('controllers.treetable.allExpanded'));
-    }.observes('controllers.treetable.allExpanded'),
 
     contentDidChange: function() {
         var node = this.get('content');
