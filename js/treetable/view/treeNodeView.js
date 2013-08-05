@@ -5,10 +5,6 @@ App.TreeNodeView = Ember.View.extend({
     classNameBindings: ['childrenAreInvisible'],
     childrenAreInvisible: false,
 
-    toggleChildrenVisibility: function() {
-        this.toggleProperty('childrenAreInvisible');
-    },
-
     allExpandedDidChange: function() {
         this.set('childrenAreInvisible', !this.get('controller.isExpanded'));
     }.observes('controller.isExpanded')
