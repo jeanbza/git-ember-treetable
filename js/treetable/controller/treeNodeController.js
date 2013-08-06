@@ -12,7 +12,7 @@ App.TreeNodeController = Ember.ObjectController.extend({
         App.TreeNodeController.degisterNodeController(this.get('content'));
     },
 
-    toggle: function(view) {
+    toggle: function() {
         this.toggleProperty('isExpanded');
     },
 
@@ -51,6 +51,16 @@ App.TreeNodeController = Ember.ObjectController.extend({
         }
 
         controller.set('checked', this.allChildrenChecked(node));
+    },
+
+    bubbleExpanded: function() {
+        var parentController = App.TreeNodeController.controllerForNode(this.get('content.parent'));
+        if (!parentController) {
+            return; //We've reached root
+        } else {
+            parentController.toggle();
+            parentController.bubbleExpanded();
+        }
     },
 
     /**
@@ -97,7 +107,10 @@ App.register('controller:treeNode', App.TreeNodeController, {singleton: false});
 
 App.TreeNodeController.reopenClass({
     nodeControllers: {},
+    nodeControllersById: {},
+
     registerNodeController: function(node, controller) {
+        this.nodeControllersById[node.id] = controller;
         this.nodeControllers[Ember.guidFor(node)] = controller;
     },
     unregisterNodeController: function(node, controller) {
@@ -105,5 +118,8 @@ App.TreeNodeController.reopenClass({
     },
     controllerForNode: function(node) {
         return this.nodeControllers[Ember.guidFor(node)];
+    },
+    controllerForNodeById: function(id) {
+        return this.nodeControllersById[id];
     }
 });

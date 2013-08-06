@@ -1,4 +1,4 @@
-var recursiveDepth = 7;
+var recursiveDepth = 4;
 var maxChildrenPerParent = 5;
 var items = 0;
 
@@ -28,11 +28,11 @@ function recursivelyCreateHierarchicalTree(recursiveDepth, maxChildrenPerParent)
         for(var x = 0; x < getRandomNumber(1, maxChildrenPerParent); x++) {
             var newChild = recursivelyCreateHierarchicalTree(recursiveDepth-1, maxChildrenPerParent);
             children.push(newChild);
-            items++;
         }
     }
 
-    return {text: getRandomWord(), children: children};
+    items++;
+    return {id: items, text: getRandomWord(), children: children};
 }
 
 App.set('treeRoot', setParentsOnTree(recursivelyCreateHierarchicalTree(recursiveDepth, maxChildrenPerParent)));

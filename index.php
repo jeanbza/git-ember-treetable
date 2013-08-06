@@ -14,10 +14,10 @@
 	<script type="text/javascript" src="js/ember/ember-1.0.0-rc.6.js"></script>
 	
     <script type="text/javascript" src="js/treetable/treetable.js"></script>
+    <script type="text/javascript" src="js/treetable/model/model.js"></script>
     <script type="text/javascript" src="js/treetable/controller/treeTableController.js"></script>
     <script type="text/javascript" src="js/treetable/controller/treeBranchController.js"></script>
     <script type="text/javascript" src="js/treetable/controller/treeNodeController.js"></script>
-    <script type="text/javascript" src="js/treetable/model/model.js"></script>
     <script type="text/javascript" src="js/treetable/view/treeTableView.js"></script>
     <script type="text/javascript" src="js/treetable/view/treeBranchView.js"></script>
     <script type="text/javascript" src="js/treetable/view/treeNodeView.js"></script>
@@ -31,15 +31,21 @@
 <script type="text/x-handlebars">
     <div id="amountItems"></div>
 
+    <br>
+
+    <button {{action expandRandomItem}}>Toggle item 10</button>
+
+    <br><br>
+
     {{render "treetable" Webapp.TreetableController}}
 </script>
 
 <script data-template-name="tree-application" type="text/x-handlebars">
     <div {{action toggleAllExpanded}} class="expand-all">
         {{#if controllers.treetable.allExpanded}}
-            Collapse All
+            <a href="#">Collapse All</a>
         {{else}}
-            Expand All
+            <a href="#">Expand All</a>
         {{/if}}
     </div>
 
@@ -74,7 +80,7 @@
     </span>
     
     {{view Ember.Checkbox checkedBinding="checked"}}
-    {{text}}
+    {{id}}. {{text}}
     
     {{control "treeBranch" content}}
 </script>
