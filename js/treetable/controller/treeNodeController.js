@@ -1,7 +1,7 @@
 App.TreeNodeController = Ember.ObjectController.extend({
     needs: 'treetable',
 
-    isExpanded: true,
+    isExpanded: false,
     checked: false,
 
     allExpandedDidChange: function() {

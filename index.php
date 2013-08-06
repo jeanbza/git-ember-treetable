@@ -28,7 +28,9 @@
 </head>
 <body>
 
-<script type="text/x-handlebars" dat>
+<script type="text/x-handlebars">
+    <div id="amountItems"></div>
+
     {{render "treetable" Webapp.TreetableController}}
 </script>
 

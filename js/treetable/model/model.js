@@ -1,5 +1,6 @@
-var recursiveDepth = 5;
+var recursiveDepth = 7;
 var maxChildrenPerParent = 5;
+var items = 0;
 
 App.set('selectedNodes', Em.A()); //Start with an empty array
 
@@ -27,6 +28,7 @@ function recursivelyCreateHierarchicalTree(recursiveDepth, maxChildrenPerParent)
         for(var x = 0; x < getRandomNumber(1, maxChildrenPerParent); x++) {
             var newChild = recursivelyCreateHierarchicalTree(recursiveDepth-1, maxChildrenPerParent);
             children.push(newChild);
+            items++;
         }
     }
 
@@ -34,3 +36,6 @@ function recursivelyCreateHierarchicalTree(recursiveDepth, maxChildrenPerParent)
 }
 
 App.set('treeRoot', setParentsOnTree(recursivelyCreateHierarchicalTree(recursiveDepth, maxChildrenPerParent)));
+$(document).ready(function(){
+    $("#amountItems").text(items+" items in tree");
+});
