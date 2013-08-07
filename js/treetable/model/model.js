@@ -2,7 +2,7 @@ var recursiveDepth = 4;
 var maxChildrenPerParent = 5;
 var items = 0;
 
-App.set('selectedNodes', Em.A());  //Start with an empty array
+App.set('selectedNodes', Em.A());   //Start with an empty array
 
 function setParentsOnTree(node, parent) {
     Ember.set(node, 'parent', parent);
